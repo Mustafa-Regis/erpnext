@@ -138,6 +138,13 @@ class PartyLedgerSummaryReport(object):
 
 		columns += [
 			{
+				"label": _("Period Balance"),
+				"fieldname": "period_balance",
+				"fieldtype": "Currency",
+				"options": "currency",
+				"width": 120,
+			},
+			{
 				"label": _("Closing Balance"),
 				"fieldname": "closing_balance",
 				"fieldtype": "Currency",
@@ -204,6 +211,7 @@ class PartyLedgerSummaryReport(object):
 						"paid_amount": 0,
 						"return_amount": 0,
 						"closing_balance": 0,
+						"period_balance": 0,
 						"currency": company_currency,
 					}
 				),
@@ -227,6 +235,8 @@ class PartyLedgerSummaryReport(object):
 					self.party_data[gle.party].return_amount -= amount
 				else:
 					self.party_data[gle.party].paid_amount -= amount
+
+				self.party_data[gle.party].period_balance = self.party_data[gle.party].invoiced_amount - self.party_data[gle.party].return_amount - self.party_data[gle.party].paid_amount
 
 		out = []
 		for party, row in self.party_data.items():
