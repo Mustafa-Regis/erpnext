@@ -42,6 +42,15 @@ REPORT_FILTER_TEST_CASES: List[Tuple[ReportName, ReportFilters]] = [
 			"_optional": True,
 		},
 	),
+	(
+		"Stock Based On Price List",
+		{
+			"from_date": "2021-01-01",
+			"to_date": "2021-12-31",
+			"value_quantity": "Quantity",
+			"_optional": True,
+		},
+	),
 	("Warehouse wise Item Balance Age and Value", {"_optional": True}),
 	(
 		"Item Variant Details",
