@@ -23,6 +23,7 @@
   "allow_multiple_items",
   "bill_for_rejected_quantity_in_purchase_invoice",
   "disable_last_purchase_rate",
+  "update_existing_buying_price_list_rate",
   "show_pay_button",
   "subcontract",
   "backflush_raw_materials_of_subcontract_based_on",
@@ -164,6 +165,12 @@
    "fieldname": "over_order_allowance",
    "fieldtype": "Float",
    "label": "Over Order Allowance (%)"
+  },
+  {
+   "default": "o",
+   "fieldname": "update_existing_buying_price_list_rate",
+   "fieldtype": "Check",
+   "label": "Update Existing Buying Price List Rate"
   }
  ],
  "icon": "fa fa-cog",
@@ -171,7 +178,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-02 17:02:14.404622",
+ "modified": "2024-03-31 08:03:54.299565",
  "modified_by": "Administrator",
  "module": "Buying",
  "name": "Buying Settings",

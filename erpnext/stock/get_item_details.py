@@ -819,6 +819,12 @@ def get_price_list_rate(args, item_doc, out=None):
 			if args.price_list and args.rate:
 				insert_item_price(args)
 			return out
+		
+		if frappe.db.get_single_value("Stock Settings", "update_existing_price_list_rate") or frappe.db.get_single_value(
+			"Buying Settings", "update_existing_buying_price_list_rate"):
+			if args.price_list and args.rate:
+				insert_item_price(args)
+
 
 		out.price_list_rate = (
 			flt(price_list_rate) * flt(args.plc_conversion_rate) / flt(args.conversion_rate)
@@ -864,6 +870,15 @@ def insert_item_price(args):
 						_("Item Price updated for {0} in Price List {1}").format(args.item_code, args.price_list),
 						alert=True,
 					)
+
+				elif item_price.price_list_rate != price_list_rate and frappe.db.get_single_value(
+					"Buying Settings", "update_existing_buying_price_list_rate") and args.transaction_type == "buying":
+					frappe.db.set_value("Item Price", item_price.name, "price_list_rate", price_list_rate)
+					frappe.msgprint(
+						_("Item Price updated for {0} in Price List {1}").format(args.item_code, args.price_list),
+						alert=True,
+					)
+					
 			else:
 				item_price = frappe.get_doc(
 					{
